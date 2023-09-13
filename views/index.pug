@@ -4,6 +4,6 @@ block content
   h1= title
   p Welcome to sleep entries
   each sleep_entry, key in sleep_entries
-    li #{sleep_entry.date}: bedtime: #{sleep_entry.bedtime}, asleep_by: #{sleep_entry.asleep_by}, risetime: #{sleep_entry.risetime} 
+    li #{sleep_entry.date_formatted}: bedtime: #{sleep_entry.bedtime_formatted}, asleep_by: #{sleep_entry.asleep_by_formatted}, risetime: #{sleep_entry.risetime_formatted} 
 
   

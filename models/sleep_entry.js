@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const {DateTime} = require("luxon");
 
 const Schema = mongoose.Schema;
 
@@ -10,6 +11,26 @@ const Sleep_Entry_Schema = new Schema({
     sleep_routine_followed: {type:Boolean, required: true},
     comment: {type:String}
 })
+
+Sleep_Entry_Schema.virtual("date_formatted").get(function () {
+    let date_formatted = ""
+    if (this.date) {
+        date_formatted = DateTime.fromJSDate(this.date).toLocaleString(DateTime.DATE_MED);
+    }
+    return date_formatted
+})
+Sleep_Entry_Schema.virtual("bedtime_formatted").get(function () { return format_time(this.bedtime) });
+Sleep_Entry_Schema.virtual("asleep_by_formatted").get(function () { return format_time(this.asleep_by) });
+Sleep_Entry_Schema.virtual("risetime_formatted").get(function () { return format_time(this.risetime) });
+
+function format_time(time_string) {
+    let time_string_formatted = ""
+    if (time_string){
+        time_string_formatted = `${time_string.slice(0, 2)}:${time_string.slice(2,4)}`
+        console.log(time_string)
+    }
+    return time_string_formatted
+}
 
 module.exports = mongoose.model("sleep_entry", Sleep_Entry_Schema);
 
