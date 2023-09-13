@@ -3,11 +3,24 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+require('dotenv').config()
 
 var indexRouter = require('./routes/index');
 const sleep_entries_router = require('./routes/sleep_entries')
+const user_settings_router = require('./routes/user_settings')
 
 var app = express();
+
+//mongoose connection
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
+const mongoDB = process.env.mongoDB;
+main().catch((err) => console.log(err));
+async function main() {
+  console.log("starting mongoDB connection")
+  await mongoose.connect(mongoDB);
+  console.log("mongoDB connected")
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,7 +33,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use("/sleep_entries", sleep_entries_router); // Add catalog routes to middleware chain.
+app.use("/sleep_entries", sleep_entries_router); 
+app.use("/settings", user_settings_router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

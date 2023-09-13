@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to settings
+  
+  p #[strong desired bedtime: ] #{user_settings.desired_bedtime}
+  p #[strong desired asleep by: ] #{user_settings.desired_asleep_by}
+  p #[strong desired risetime: ] #{user_settings.desired_risetime}

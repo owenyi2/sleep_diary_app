@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const {DateTime} = require("luxon");
 
 const Schema = mongoose.Schema;
 
@@ -11,3 +10,6 @@ const Sleep_Entry_Schema = new Schema({
     sleep_routine_followed: {type:Boolean, required: true},
     comment: {type:String}
 })
+
+module.exports = mongoose.model("sleep_entry", Sleep_Entry_Schema);
+
