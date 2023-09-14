@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+  p Sleep Entry for #{sleep_entry.date_formatted}
+  
+  p #{sleep_entry}
+
+  p 
+    a(href=`${sleep_entry.url}/update`) update entry
+  p 
+    a(href=`${sleep_entry.url}/delete`) delete entry

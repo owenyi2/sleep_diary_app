@@ -23,11 +23,12 @@ Sleep_Entry_Schema.virtual("bedtime_formatted").get(function () { return format_
 Sleep_Entry_Schema.virtual("asleep_by_formatted").get(function () { return format_time(this.asleep_by) });
 Sleep_Entry_Schema.virtual("risetime_formatted").get(function () { return format_time(this.risetime) });
 
+Sleep_Entry_Schema.virtual("url").get(function() { return `/sleep_entries/${DateTime.fromJSDate(this.date).toISODate()}` })
+
 function format_time(time_string) {
     let time_string_formatted = ""
     if (time_string){
         time_string_formatted = `${time_string.slice(0, 2)}:${time_string.slice(2,4)}`
-        console.log(time_string)
     }
     return time_string_formatted
 }

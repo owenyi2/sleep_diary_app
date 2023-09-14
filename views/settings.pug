@@ -1,9 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to settings
-  
-  p #[strong desired bedtime: ] #{user_settings.desired_bedtime}
-  p #[strong desired asleep by: ] #{user_settings.desired_asleep_by}
-  p #[strong desired risetime: ] #{user_settings.desired_risetime}
+  h1= Settings
+
+  form(method='POST', action='settings/update')
+    div
+      label(for='desired_bedtime') Desired Bedtime:
+      input(type='time' placeholder='Enter time' name='desired_bedtime' required='true' value=(undefined===user_settings.desired_bedtime_formatted ? '' : user_settings.desired_bedtime_formatted) )
+      label(for='desired_asleep_by') Desired Asleep By:
+      input(type='time' placeholder='Enter time' name='desired_asleep_by' required='true' value=(undefined===user_settings.desired_asleep_by_formatted ? '' : user_settings.desired_asleep_by_formatted) )
+      label(for='desired_risetime') Desired Risetime:
+      input(type='time' placeholder='Enter time' name='desired_risetime' required='true' value=(undefined===user_settings.desired_risetime_formatted ? '' : user_settings.desired_risetime_formatted) )
+      label(for='sleep_routine') Sleep Routine:
+      input(type='checkbox' name='sleep_routine' checked=(undefined===user_settings.sleep_routine ? false: user_settings.sleep_routine)) 
+    button(type='submit') Submit
