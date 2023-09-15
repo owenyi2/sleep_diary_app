@@ -7,7 +7,7 @@ block content
 
   form(method='POST', action=action)
     div
-      label(for='desired_bedtime') Date:
+      label(for='date') Date:
       input(type='date' name='date' required='true' value=(undefined===sleep_entry ? '' : sleep_entry.date_ISO8601) readonly=(update))
       label(for='bedtime') Bedtime:
       input(type='time' placeholder='Enter time' name='bedtime' required='true' value=(undefined===sleep_entry ? '' : sleep_entry.bedtime_formatted) )

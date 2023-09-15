@@ -72,11 +72,18 @@ exports.delete_entry = asyncHandler(async (req, res, next) => {
     res.redirect("/sleep_entries");
 })
 
-exports.search = (req, res, next) => {
+exports.search = asyncHandler(async (req, res, next) => {  
+    const sleep_entries = await Sleep_Entry.find().sort({date: "desc"}).limit(10).exec()
 
-    res.send("TODO: search page")
-}
+    console.log(new Date().toISOString().substring(0, 10))
+    res.render("search", {date: new Date().toISOString().substring(0, 10), sleep_entries: sleep_entries, limit: 10})
+})
 
-exports.search_results = (req, res, next) => {
-    res.send("TODO: search results")
-}
+exports.search_results = asyncHandler(async (req, res, next) => {
+    const {search_before, limit} = req.body
+
+    console.log(search_before, limit)
+    const sleep_entries = await Sleep_Entry.find({date: {$lte: search_before} }).sort({date: "desc"}).limit(limit).exec()
+
+    res.render("search", {date: search_before, sleep_entries: sleep_entries, limit: limit})
+})

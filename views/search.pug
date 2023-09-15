@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 Search 
+
+  form(method='POST', action="/sleep_entries/search")
+    div
+      label(for='search_before') Search Before:
+      input(type='date' name='search_before' required='true' value=date)
+      label(for='limit') Limit: 
+      input(type='number' name='limit' required='true' value=limit)
+    button(type='submit') Submit
+    each sleep_entry, key in sleep_entries
+      li #{sleep_entry.date_formatted}: bedtime: #{sleep_entry.bedtime_formatted}, asleep_by: #{sleep_entry.asleep_by_formatted}, risetime: #{sleep_entry.risetime_formatted} 
+        a(href=`${sleep_entry.url}/detail`) link
