@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  p are you sure you want to delete entry for #{date}
+
+  form(method='POST', action=`/sleep_entries/${date}/delete`)
+   
+    button(type='submit') Delete

@@ -11,6 +11,7 @@ exports.settings = asyncHandler(async (req, res, next) => {
 
 exports.update = asyncHandler(async (req, res, next) => {
     const id = await User_Settings.findOne({}, "_id").exec()
+
     const settings = new User_Settings({
         desired_bedtime: req.body.desired_bedtime.replace(":", ""),
         desired_asleep_by: req.body.desired_asleep_by.replace(":", ""),

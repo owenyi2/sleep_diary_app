@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1= title
+
+  - const action = update ? `${sleep_entry.url}/update` : "/sleep_entries/new"
+
+  form(method='POST', action=action)
+    div
+      label(for='desired_bedtime') Date:
+      input(type='date' name='date' required='true' value=(undefined===sleep_entry ? '' : sleep_entry.date_ISO8601) readonly=(update))
+      label(for='bedtime') Bedtime:
+      input(type='time' placeholder='Enter time' name='bedtime' required='true' value=(undefined===sleep_entry ? '' : sleep_entry.bedtime_formatted) )
+      label(for='asleep by') Asleep By:
+      input(type='time' placeholder='Enter time' name='asleep_by' required='true' value=(undefined===sleep_entry ? '' : sleep_entry.asleep_by_formatted) )
+      label(for='risetime') Risetime:
+      input(type='time' placeholder='Enter time' name='risetime' required='true' value=(undefined===sleep_entry ? '' : sleep_entry.risetime_formatted) )
+      label(for='sleep_routine_followed') Sleep Routine Followed:
+      input(type='checkbox' name='sleep_routine_followed' checked=(undefined===sleep_entry ? false: sleep_entry.sleep_routine_followed)) 
+      label(for='comment') Comment:
+      input(type='text' placeholder='comment' name='comment' value=(undefined===sleep_entry ? '' : sleep_entry.comment))
+    button(type='submit') Submit
+  if collision_error 
+    p
+      | Entry already exists for this date. You can either update 
+      a(href=`${collision_error.url}/update`) the entry
+      |  for this date or create an entry for a different date 

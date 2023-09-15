@@ -19,6 +19,14 @@ Sleep_Entry_Schema.virtual("date_formatted").get(function () {
     }
     return date_formatted
 })
+Sleep_Entry_Schema.virtual("date_ISO8601").get(function() {
+    let date_ISO8601 = ""
+    if (this.date) {
+        date_ISO8601 = DateTime.fromJSDate(this.date).toISODate();
+    }
+    return date_ISO8601
+})
+
 Sleep_Entry_Schema.virtual("bedtime_formatted").get(function () { return format_time(this.bedtime) });
 Sleep_Entry_Schema.virtual("asleep_by_formatted").get(function () { return format_time(this.asleep_by) });
 Sleep_Entry_Schema.virtual("risetime_formatted").get(function () { return format_time(this.risetime) });
